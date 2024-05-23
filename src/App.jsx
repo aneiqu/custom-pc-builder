@@ -66,26 +66,18 @@ function App() {
       reader.onload = (e) => {
         const content = e.target.result;
         JSON.parse(content).map((el) => {
-          if (
-            !JSON.parse(data)
-              .concat(JSON.parse(content))
-              .find(({ keyV }) => keyV === el.keyV)
-          ) {
-            setData((prev) => JSON.stringify(JSON.parse(prev).concat([el])));
-          } else {
-            setData((prev) =>
-              JSON.stringify(
-                JSON.parse(prev).concat([
-                  {
-                    ...el,
-                    keyV: JSON.parse(prev).reduce((max, obj) => {
-                      return (obj.keyV > max ? obj.keyV : max) + 1;
-                    }, 0),
-                  },
-                ])
-              )
-            );
-          }
+          setData((prev) =>
+            JSON.stringify(
+              JSON.parse(prev).concat([
+                {
+                  ...el,
+                  keyV: JSON.parse(prev).reduce((max, obj) => {
+                    return (obj.keyV > max ? obj.keyV : max) + 1;
+                  }, 0),
+                },
+              ])
+            )
+          );
         });
       };
       reader.readAsText(file);

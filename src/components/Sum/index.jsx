@@ -3,7 +3,7 @@ import { useTableRowContext } from "../context";
 /* eslint-disable react/prop-types */
 export default function Sum(props) {
   const { rowsData } = useTableRowContext();
-  console.log(rowsData);
+
   return (
     <tr>
       <td>Suma</td>

@@ -125,7 +125,7 @@ export default function TableRow(props) {
         </a>
       </td>
       <td className={`${hidden ? "hidden" : ""} group`}>
-        <div className='hidden group-hover:flex text-wrap absolute mt-[38px]  bg-red-500 w-60 h-max p-2 rounded-md rounded-tl-none '>
+        <div className='hidden group-hover:flex text-wrap absolute top-6  bg-red-500 w-60 h-max p-2 rounded-md rounded-bl-none opacity-0 group-hover:opacity-50 delay-150'>
           Zastępuje główny narzut jeżeli jest wyższy niż 1 (ustaw na 1 żeby nie był brany pod uwagę)
         </div>
         <InputField

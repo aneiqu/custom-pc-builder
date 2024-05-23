@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const TableRowContext = createContext();
 
@@ -18,9 +18,6 @@ export const TableRowProvider = (props) => {
     });
   };
 
-  useEffect(() => {
-    // console.log(rowsData);
-  }, [rowsData]);
   const removeData = (keyV) => {
     setRowsData((prevData) => {
       const newData = prevData.filter((el) => el.keyV !== keyV);
@@ -54,7 +51,7 @@ export const TableRowProvider = (props) => {
       }}
     >
       <button
-        className='bg-gradient-to-br m-2 border-2 border-slate-700 rounded-md p-2 hover:scale-110 duration-150'
+        className='bg-gradient-to-br m-2 border-2 border-slate-700 rounded-md p-2 active:translate-y-1 active:shadow-none  shadow-sm shadow-slate-500 duration-150'
         onClick={exportData}
       >
         Pobierz

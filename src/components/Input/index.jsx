@@ -2,6 +2,8 @@
 export default function InputField(props) {
   return (
     <input
+      min={1}
+      step={props?.step}
       type={props.type}
       defaultValue={props.defaultValue}
       onChange={(e) => props.setData({ ...props.data, [props.dataKey]: e.target.value })}

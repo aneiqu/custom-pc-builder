@@ -21,7 +21,12 @@ export default function TableRow(props) {
     updateRowData(props.keyV - 1, {
       ...data,
       grossPrice: (data.netPrice * data.quantity * 1.23).toFixed(2),
-      grossPriceWithMarkup: (data.netPrice * data.quantity * 1.23 * multiplier).toFixed(2),
+      grossPriceWithMarkup: (
+        data.netPrice *
+        data.quantity *
+        1.23 *
+        (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+      ).toFixed(2),
       multiplier: multiplier,
     });
   }, [data, multiplier]);
@@ -87,9 +92,24 @@ export default function TableRow(props) {
       </td>
       <td>
         {data.netPrice && data.quantity
-          ? (data.netPrice * data.quantity * 1.23 * multiplier).toFixed(2)
-          : (props.netPrice * props.quantity * 1.23 * multiplier).toFixed(2) >= 0
-          ? (props.netPrice * props.quantity * 1.23 * multiplier).toFixed(2)
+          ? (
+              data.netPrice *
+              data.quantity *
+              1.23 *
+              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+            ).toFixed(2)
+          : (
+              props.netPrice *
+              props.quantity *
+              1.23 *
+              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+            ).toFixed(2) >= 0
+          ? (
+              props.netPrice *
+              props.quantity *
+              1.23 *
+              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+            ).toFixed(2)
           : 0}
         zł
       </td>
@@ -103,6 +123,20 @@ export default function TableRow(props) {
         <a href={data.link} target='_blank' className={`text-blue-800 underline`}>
           Przenieś
         </a>
+      </td>
+      <td className={`${hidden ? "hidden" : ""} group`}>
+        <div className='hidden group-hover:flex text-wrap absolute mt-[38px]  bg-red-500 w-60 h-max p-2 rounded-md rounded-tl-none '>
+          Zastępuje główny narzut jeżeli jest wyższy niż 1 (ustaw na 1 żeby nie był brany pod uwagę)
+        </div>
+        <InputField
+          type={"number"}
+          defaultValue={props.personalMultiplier}
+          data={data}
+          setData={setData}
+          placeholder={"Np. 1.01"}
+          step={"0.01"}
+          dataKey={"personalMultiplier"}
+        />
       </td>
       <td className={`${hidden ? "hidden" : ""}`}>
         <button onClick={handleRemove}>Usuń</button>

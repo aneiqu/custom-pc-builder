@@ -24,8 +24,9 @@ function App() {
           <TableRow
             part={el?.part}
             model={el?.model}
-            netPrice={el?.netPrice}
-            quantity={el?.quantity}
+            netPrice={el?.netPrice ? el.netPrice : 0}
+            quantity={el?.quantity ? el.quantity : 0}
+            personalMultiplier={el?.personalMultiplier}
             link={el?.link}
             keyV={el.keyV}
             key={el.keyV}
@@ -96,28 +97,28 @@ function App() {
       <TableRowProvider hidden={hiddenMode} multiplier={multiplier}>
         <div className='flex flex-row space-x-4 items-center'>
           <button
-            className='bg-gradient-to-br border-2 border-slate-700 rounded-md p-2 ml-2 hover:scale-110 duration-150'
+            className='bg-gradient-to-br border-2 border-slate-700 rounded-md p-2 ml-2 active:translate-y-1 active:shadow-none  shadow-sm shadow-slate-500 duration-150'
             onClick={addNewRow}
           >
             Dodaj
           </button>
 
-          <span className='hover:scale-110 duration-150'>
+          <span className='active:translate-y-1 duration-150'>
             <label
               htmlFor='upload'
-              className='bg-gradient-to-br border-2 p-3 rounded-md border-slate-700 cursor-pointer '
+              className='bg-gradient-to-br border-2 p-3 rounded-md border-slate-700 cursor-pointer active:translate-y-1 active:shadow-none  shadow-sm shadow-slate-500 '
             >
               Importuj
             </label>
             <input id='upload' type='file' onChange={handleFileChange} className='hidden'></input>
           </span>
           <button
-            className='bg-gradient-to-br border-2 border-slate-700 rounded-md p-2 hover:scale-110 duration-150'
+            className='bg-gradient-to-br border-2 border-slate-700 rounded-md p-2 active:translate-y-1 active:shadow-none  shadow-sm shadow-slate-500 duration-150'
             onClick={toggleVisibility}
           >
             Przełącz tryb widoczności
           </button>
-          <span className='bg-gradient-to-br flex border-2 border-slate-700 p-2 w-36 rounded-md'>
+          <span className='bg-gradient-to-br flex border-2 border-slate-700 p-2 w-36 rounded-md active:translate-y-1 active:shadow-none  shadow-sm shadow-slate-500 duration-150'>
             <label>Narzut: </label>
             <input
               value={multiplier}
@@ -141,6 +142,7 @@ function App() {
                 <th className={hiddenMode ? "hidden" : ""}>Cena brutto</th>
                 <th>{hiddenMode ? "Cena brutto" : "Cena brutto z narzutem"}</th>
                 <th className={hiddenMode ? "hidden" : ""}>Link</th>
+                <th className={hiddenMode ? "hidden" : ""}>Osobisty narzut</th>
                 <th className={hiddenMode ? "hidden" : ""}></th>
               </tr>
             </thead>

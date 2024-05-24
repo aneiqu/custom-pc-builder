@@ -10,11 +10,11 @@ export const TableRowProvider = (props) => {
   const [rowsData, setRowsData] = useState([]);
   const [hidden, setHidden] = useState(true);
 
-  const updateRowData = (index, data) => {
+  const updateRowData = (keyV, data) => {
     setRowsData((prevData) => {
-      const newData = [...prevData];
-      newData[index] = data;
-      return newData;
+      const newData = [...prevData].filter((el) => el.keyV !== keyV);
+      newData.push(data);
+      return newData.sort((a, b) => a.keyV - b.keyV);
     });
   };
 
@@ -28,6 +28,7 @@ export const TableRowProvider = (props) => {
   const toggleHide = () => {
     setHidden(!hidden);
   };
+
   const exportData = () => {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
       JSON.stringify(rowsData)

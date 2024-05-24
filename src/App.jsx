@@ -8,6 +8,7 @@ function App() {
   const [hiddenMode, setHiddenMode] = useState(false);
   const [data, setData] = useState("[]");
   const [rows, setRows] = useState([]);
+
   useEffect(() => {
     const objects = JSON.parse(data);
     if (objects.length > 1) {
@@ -17,7 +18,6 @@ function App() {
           : multiplier
       );
     }
-
     setRows(
       JSON.parse(data).map((el) => {
         return (
@@ -37,6 +37,10 @@ function App() {
     );
   }, [data]);
 
+  useEffect(() => {
+    // console.log(data);
+  }, [data]);
+
   const removeRow = (keyV) => {
     setData((prev) => JSON.stringify(JSON.parse(prev).filter((el) => el.keyV !== keyV)));
   };
@@ -48,7 +52,7 @@ function App() {
     setData((prev) => {
       const highestKey = JSON.parse(data).reduce((max, obj) => {
         return obj.keyV > max ? obj.keyV : max;
-      }, 0);
+      }, -1);
       return JSON.stringify(
         JSON.parse(prev).concat([
           {

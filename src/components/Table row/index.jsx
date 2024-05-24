@@ -15,10 +15,11 @@ export default function TableRow(props) {
     quantity: props.quantity,
     link: props.link,
     keyV: props.keyV,
+    personalMultiplier: props.personalMultiplier,
   });
 
   useEffect(() => {
-    updateRowData(props.keyV - 1, {
+    updateRowData(props.keyV, {
       ...data,
       grossPrice: (data.netPrice * data.quantity * 1.23).toFixed(2),
       grossPriceWithMarkup: (

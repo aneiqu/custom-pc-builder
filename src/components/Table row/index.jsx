@@ -84,34 +84,15 @@ export default function TableRow(props) {
         />
       </td>
       <td className={`${hidden ? "hidden" : ""}`}>
-        {data.netPrice && data.quantity
-          ? (data.netPrice * data.quantity * 1.23).toFixed(2)
-          : (props.netPrice * props.quantity * 1.23).toFixed(2) >= 0
-          ? (props.netPrice * props.quantity * 1.23).toFixed(2)
-          : 0}
-        zł
+        {(props.netPrice * props.quantity * 1.23).toFixed(2)} zł
       </td>
       <td>
-        {data.netPrice && data.quantity
-          ? (
-              data.netPrice *
-              data.quantity *
-              1.23 *
-              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
-            ).toFixed(2)
-          : (
-              props.netPrice *
-              props.quantity *
-              1.23 *
-              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
-            ).toFixed(2) >= 0
-          ? (
-              props.netPrice *
-              props.quantity *
-              1.23 *
-              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
-            ).toFixed(2)
-          : 0}
+        {(
+          data.netPrice *
+          data.quantity *
+          1.23 *
+          (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+        ).toFixed(2)}
         zł
       </td>
       <td className={`${hidden ? "hidden" : ""}`}>

@@ -37,10 +37,6 @@ function App() {
     );
   }, [data]);
 
-  useEffect(() => {
-    // console.log(data);
-  }, [data]);
-
   const removeRow = (keyV) => {
     setData((prev) => JSON.stringify(JSON.parse(prev).filter((el) => el.keyV !== keyV)));
   };
@@ -56,7 +52,7 @@ function App() {
       return JSON.stringify(
         JSON.parse(prev).concat([
           {
-            keyV: highestKey >= 0 ? highestKey + 1 : 0,
+            keyV: highestKey + 1,
           },
         ])
       );

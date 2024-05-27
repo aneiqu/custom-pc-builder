@@ -18,6 +18,8 @@ export default function TableRow(props) {
     personalMultiplier: props.personalMultiplier,
   });
 
+  const isHidden = hidden ? "hidden" : "";
+
   useEffect(() => {
     updateRowData(props.keyV, {
       ...data,
@@ -63,7 +65,7 @@ export default function TableRow(props) {
           dataKey={"model"}
         />
       </td>
-      <td className={`${hidden ? "hidden" : ""}`}>
+      <td className={isHidden}>
         <InputField
           type={"number"}
           defaultValue={props.netPrice}
@@ -73,7 +75,7 @@ export default function TableRow(props) {
           dataKey={"netPrice"}
         />
       </td>
-      <td className={`${hidden ? "hidden" : ""}`}>
+      <td className={isHidden}>
         <InputField
           type={"number"}
           defaultValue={props.quantity}
@@ -83,7 +85,7 @@ export default function TableRow(props) {
           dataKey={"quantity"}
         />
       </td>
-      <td className={`${hidden ? "hidden" : ""}`}>
+      <td className={isHidden}>
         {data.netPrice && data.quantity
           ? (data.netPrice * data.quantity * 1.23).toFixed(2)
           : (props.netPrice * props.quantity * 1.23).toFixed(2) >= 0
@@ -114,7 +116,7 @@ export default function TableRow(props) {
           : 0}
         zł
       </td>
-      <td className={`${hidden ? "hidden" : ""}`}>
+      <td className={isHidden}>
         <input
           defaultValue={data.link}
           onChange={(e) => setData({ ...data, link: e.target.value })}
@@ -139,7 +141,7 @@ export default function TableRow(props) {
           dataKey={"personalMultiplier"}
         />
       </td>
-      <td className={`${hidden ? "hidden" : ""}`}>
+      <td className={isHidden}>
         <button onClick={handleRemove}>Usuń</button>
       </td>
     </tr>

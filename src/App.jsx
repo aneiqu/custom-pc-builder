@@ -19,7 +19,7 @@ function App() {
       );
     }
     setRows(
-      JSON.parse(data).map((el) => {
+      objects.map((el) => {
         return (
           <TableRow
             part={el?.part}
@@ -35,10 +35,6 @@ function App() {
         );
       })
     );
-  }, [data]);
-
-  useEffect(() => {
-    // console.log(data);
   }, [data]);
 
   const removeRow = (keyV) => {
@@ -69,20 +65,29 @@ function App() {
       const reader = new FileReader();
       reader.onload = (e) => {
         const content = e.target.result;
-        JSON.parse(content).map((el) => {
-          setData((prev) =>
-            JSON.stringify(
-              JSON.parse(prev).concat([
-                {
-                  ...el,
-                  keyV: JSON.parse(prev).reduce((max, obj) => {
-                    return (obj.keyV > max ? obj.keyV : max) + 1;
-                  }, 0),
-                },
-              ])
-            )
-          );
-        });
+        try {
+          const parsedContent = JSON.parse(content);
+          if (Array.isArray(parsedContent)) {
+            parsedContent.forEach((el) => {
+              setData((prev) =>
+                JSON.stringify(
+                  JSON.parse(prev).concat([
+                    {
+                      ...el,
+                      keyV: JSON.parse(prev).reduce((max, obj) => {
+                        return (obj.keyV > max ? obj.keyV : max) + 1;
+                      }, 0),
+                    },
+                  ])
+                )
+              );
+            });
+          } else {
+            throw new Error("Error occured, make sure that you're importing valid JSON file");
+          }
+        } catch (err) {
+          console.error(err);
+        }
       };
       reader.readAsText(file);
     }

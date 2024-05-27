@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Sum from "./components/Sum";
 import TableRow from "./components/Table row";

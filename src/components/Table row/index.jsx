@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import InputField from "../Input";
 import { useTableRowContext } from "../context";
 
-/* eslint-disable react/prop-types */
 export default function TableRow(props) {
   const { updateRowData } = useTableRowContext();
   const { removeData } = useTableRowContext();
@@ -28,7 +29,7 @@ export default function TableRow(props) {
         data.netPrice *
         data.quantity *
         1.23 *
-        (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+        (data.personalMultiplier ? data.personalMultiplier : multiplier)
       ).toFixed(2),
       multiplier: multiplier,
     });
@@ -91,7 +92,7 @@ export default function TableRow(props) {
           data.netPrice *
           data.quantity *
           1.23 *
-          (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+          (data.personalMultiplier ? data.personalMultiplier : multiplier)
         ).toFixed(2)}
         zł
       </td>
@@ -106,10 +107,7 @@ export default function TableRow(props) {
           Przenieś
         </a>
       </td>
-      <td className={`${hidden ? "hidden" : ""} group`}>
-        <div className='hidden group-hover:flex text-wrap absolute top-6  bg-red-500 w-60 h-max p-2 rounded-md rounded-bl-none opacity-0 group-hover:opacity-50 delay-150'>
-          Zastępuje główny narzut jeżeli jest wyższy niż 1 (ustaw na 1 żeby nie był brany pod uwagę)
-        </div>
+      <td className={isHidden}>
         <InputField
           type={"number"}
           defaultValue={props.personalMultiplier}

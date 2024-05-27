@@ -85,35 +85,14 @@ export default function TableRow(props) {
           dataKey={"quantity"}
         />
       </td>
-      <td className={isHidden}>
-        {data.netPrice && data.quantity
-          ? (data.netPrice * data.quantity * 1.23).toFixed(2)
-          : (props.netPrice * props.quantity * 1.23).toFixed(2) >= 0
-          ? (props.netPrice * props.quantity * 1.23).toFixed(2)
-          : 0}
-        zł
-      </td>
+      <td className={isHidden}>{(data.netPrice * data.quantity * 1.23).toFixed(2)} zł</td>
       <td>
-        {data.netPrice && data.quantity
-          ? (
-              data.netPrice *
-              data.quantity *
-              1.23 *
-              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
-            ).toFixed(2)
-          : (
-              props.netPrice *
-              props.quantity *
-              1.23 *
-              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
-            ).toFixed(2) >= 0
-          ? (
-              props.netPrice *
-              props.quantity *
-              1.23 *
-              (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
-            ).toFixed(2)
-          : 0}
+        {(
+          data.netPrice *
+          data.quantity *
+          1.23 *
+          (data.personalMultiplier > 1 ? data.personalMultiplier : multiplier)
+        ).toFixed(2)}
         zł
       </td>
       <td className={isHidden}>

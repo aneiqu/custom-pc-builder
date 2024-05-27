@@ -52,7 +52,7 @@ function App() {
       return JSON.stringify(
         JSON.parse(prev).concat([
           {
-            keyV: highestKey >= 0 ? highestKey + 1 : 0,
+            keyV: highestKey + 1,
           },
         ])
       );
